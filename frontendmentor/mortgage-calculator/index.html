@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+<link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+<link rel="stylesheet" href="style.css">
+
+<title>Frontend Mentor | Mortgage repayment calculator</title>
+
+</head>
+<body>
+
+	<main>
+		<div class="panel form">
+			<h1 class="title">Mortgage Calculator</h1>
+			<div class="linkButton clear-all">Clear All</div>
+
+			<div class="inputBlock mortgage-amount" error="0">
+				<label>Mortgage Amount</label>
+				<div class="input">
+					<div class="unit">£</div>
+					<input type="text" class="formInput numberInput mortgage-amount-input">
+				</div>
+				<div class="errorMessage">
+					This field is required
+				</div>
+			</div>
+			
+			<div class="inputBlock mortgage-term" error="0">
+				<label>Mortgage Term</label>
+				<div class="input">
+					<input type="text" class="formInput numberInput mortgage-term-input">
+					<div class="unit">years</div>
+				</div>
+				<div class="errorMessage">
+					This field is required
+				</div>
+			</div>
+			
+			<div class="inputBlock interest-rate" error="0">
+				<label>Interest Rate</label>
+				<div class="input">
+					<input type="text" class="formInput numberInput interest-rate-input">
+					<div class="unit">%</div>
+				</div>
+				<div class="errorMessage">
+					This field is required
+				</div>
+			</div>
+			
+			<div class="inputBlock mortgage-type optionContainer" error="0">
+				<label>Mortgage Type</label>
+				<div class="option">
+					<input type="radio" id="type-repayment" name="type" value="repayment" class="formRadio mortgage-type-input">
+					<label for="type-repayment">Repayment</label>
+				</div>
+				<div class="option">
+					<input type="radio" id="type-interest" name="type" value="interest-only" class="formRadio mortgage-type-input">
+					<label for="type-interest">Interest Only</label>
+				</div>
+				<div class="errorMessage">
+					This field is required
+				</div>
+			</div>
+			<button class="button mortgage-calculate" onclick="calculate()">
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path fill="#133041" d="M18.75 2.25H5.25a1.5 1.5 0 0 0-1.5 1.5v16.5a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5V3.75a1.5 1.5 0 0 0-1.5-1.5Zm-10.5 16.5a1.125 1.125 0 1 1 0-2.25 1.125 1.125 0 0 1 0 2.25Zm0-3.75a1.125 1.125 0 1 1 0-2.25 1.125 1.125 0 0 1 0 2.25ZM12 18.75a1.125 1.125 0 1 1 0-2.25 1.125 1.125 0 0 1 0 2.25ZM12 15a1.125 1.125 0 1 1 0-2.25A1.125 1.125 0 0 1 12 15Zm3.75 3.75a1.125 1.125 0 1 1 0-2.25 1.125 1.125 0 0 1 0 2.25Zm0-3.75a1.125 1.125 0 1 1 0-2.25 1.125 1.125 0 0 1 0 2.25Zm1.5-5.25a.75.75 0 0 1-.75.75h-9a.75.75 0 0 1-.75-.75V6a.75.75 0 0 1 .75-.75h9a.75.75 0 0 1 .75.75v3.75Z"/></svg>
+				Calculate Repayments
+			</button>
+
+		</div>
+		<div class="panel results" results="empty">
+
+			<div class="results-empty">
+				<img src="assets/images/illustration-empty.svg" alt="">
+				<h1>Results shown here</h1>
+				<p>
+					Complete the form and click “calculate repayments” to see what your monthly repayments would be.
+				</p>
+			</div>
+			
+			<div class="results-completed">
+				<h1>Your results</h1>
+
+				<p>
+					Your results are shown below based on the information you provided. To adjust the results, edit the form and click “calculate repayments” again.
+				</p>
+
+				<div class="card">
+					<label>Your monthly repayments</label>
+					<div class="resultMonthly">£1,797.74</div>
+					<hr>
+					<label>Total you'll repay over the term</label>
+					<div class="resultTotal">£539,322.94</div>
+				</div>
+			</div>
+		</div>
+	</main>
+	
+	<div class="attribution">
+		Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. 
+		Coded by <a href="https://maelkmark.github.io" target="_blank">MaelkMark</a>.
+	</div>
+
+<script src="script.js"></script>
+</body>
+</html>
