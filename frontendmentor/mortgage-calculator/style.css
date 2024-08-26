@@ -32,7 +32,8 @@ body {
 	align-items: center;
 	flex-direction: column;
 	background: var(--slate100);
-	height: 100vh;
+	min-height: 100vh;
+	min-height: 100dvh;
 }
 
 main {
