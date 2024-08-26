@@ -1,0 +1,1082 @@
+@font-face {
+	font-family: UbuntuRegular;
+	src: url(assets/fonts/Ubuntu-Regular.ttf);
+}
+@font-face {
+	font-family: UbuntuMedium;
+	src: url(assets/fonts/Ubuntu-Medium.ttf);
+}
+@font-face {
+	font-family: UbuntuBold;
+	src: url(assets/fonts/Ubuntu-Bold.ttf);
+}
+
+*, *::before, *::after {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+	font-family: UbuntuRegular;
+}
+
+:root {
+	--blue-marine: hsl(213, 96%, 18%);
+	--blue-purplish: hsl(243, 100%, 62%);
+	--blue-pastel: hsl(228, 100%, 84%);
+	--blue-light: hsl(206, 94%, 87%);
+	--red: hsl(354, 84%, 57%);
+	
+	--focus: #6F69AB;
+	--focus-background: #F8F9FE;
+
+	--gray-cool: hsl(231, 11%, 63%);
+	--gray-light: hsl(229, 24%, 87%);
+	--magnolia: hsl(217, 100%, 97%);
+	--alabester: hsl(231, 100%, 99%);
+
+	--shadow: 0 10px 20px #00000022;
+}
+
+body {
+	min-height: 100vh;
+	min-height: 100dvh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	background-color: #EEF5FF;
+}
+
+main {
+	background: white;
+	padding: 0.7rem;
+	border-radius: 15px;
+	display: flex;
+	min-height: 80vh;
+	width: 80%;
+	min-width: min(100%, 80ch);
+	max-width: 110ch;
+	box-shadow: var(--shadow);
+}
+
+.sidebar {
+	background: url("assets/images/bg-sidebar-desktop.svg") no-repeat bottom;
+	background-size: cover;
+	border-radius: 10px;
+	color: white;
+	display: grid;
+	align-content: start;
+	grid-template-columns: auto 1fr;
+	gap: 2em 1em;
+	padding: 1.5rem min(1.5rem, 2vw);
+	user-select: none;
+	flex: 3;
+	min-width: 14em;
+	font-size: 0.9rem;
+
+	.step {
+		display: grid;
+		grid-template-columns: subgrid;
+		grid-column: span 2;
+		align-items: center;
+		position: relative;
+		transition: 0.2s;
+
+		.stepRadio {
+			position: absolute;
+			appearance: none;
+			cursor: pointer;
+			width: 100%;
+			height: 100%;
+			outline: none;
+			display: none;
+		}
+
+		.stepNumber {
+			grid-area: 1 / 1 / 3 / 2;
+			border: 2px solid var(--blue-light);
+			border-radius: 50%;
+			width: 2.5em;
+			height: 2.5em;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-family: UbuntuBold;
+		}
+
+		.stepCaption {
+			text-transform: uppercase;
+			color: var(--blue-pastel);
+			font-size: 0.9em;
+		}
+
+		.stepName {
+			text-transform: uppercase;
+			font-family: UbuntuBold;
+		}
+
+		/* &:has(input[type="radio"]:checked) .stepNumber {
+			background-color: var(--blue-light);
+			color: var(--blue-marine);
+		} */
+
+		/* &:hover {
+			opacity: 0.85;
+		} */
+	}
+}
+
+.form {
+	flex: 7;
+	display: flex;
+	flex-direction: column;
+	align-content: space-between;
+	padding: 2rem max(min(5rem, 3vw), 1.2rem);
+	color: var(--blue-marine);
+	font-size: 0.9rem;
+
+	.formStep {
+		grid-column: 1 / -1;
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;
+		width: 100%;
+		height: 100%;
+	}
+
+	.formTitle {
+		font-family: UbuntuBold;
+		font-size: 1.6rem;
+		margin-bottom: 0.2em;
+	}
+
+	.formDescription {
+		color: var(--gray-cool);
+		max-width: 60ch;
+		line-height: 1.4em;
+	}
+
+	.formInputs {
+		display: flex;
+		align-items: stretch;
+		flex-direction: column;
+		margin: 2em 0;
+		gap: 2em;
+	}
+
+	.inputBlock {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 0.5em 0;
+	}
+
+
+	label {
+		font-family: UbuntuMedium;
+		font-size: 0.8rem;
+	}
+
+	.inputMessage, .inputMessage::before {
+		text-align: right;
+		font-family: UbuntuBold;
+		color: var(--red);
+	}
+
+	.formInput {
+		padding: 0.9em;
+		font-family: UbuntuBold;
+		border-radius: 5px;
+		border: none;
+		outline: 2px solid var(--gray-light);
+		color: var(--blue-marine);
+		grid-column: 1 / -1;
+		transition: 0.2s;
+		transition-property: outline-color;
+		width: 100%;
+		cursor: pointer;
+
+		&::placeholder {
+			color: var(--gray-cool);
+		}
+
+		&:hover {
+			outline-color: var(--gray-cool);
+		}
+
+		&:focus {
+			outline-color: var(--focus);
+		}
+	}
+
+	&:has(.submit input[type="checkbox"]:checked) {
+		.inputBlock:has(input:invalid) input {
+			outline-color: var(--red);
+		}
+
+
+		.inputBlock:has(input:invalid) {
+			.inputMessage::before {
+				content: "This field is required";
+			}
+
+			&[field="email"] .inputMessage::before {
+				content: "Enter a valid e-mail address";
+			}
+
+			&[field="phone"] .inputMessage::before {
+				content: "Enter a valid phone number";
+			}
+		}
+
+		.inputBlock:has(input:placeholder-shown) .inputMessage::before {
+			content: "This field is required" !important;
+		}
+	}
+
+	.radioOptions {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		justify-content: center;
+		gap: 1em;
+
+		.option {
+			border: 2px solid var(--gray-light);
+			border-radius: 8px;
+			padding: 1em;
+			position: relative;
+			display: grid;
+			grid-template-columns: 1fr;
+
+			input[type="radio"] {
+				appearance: none;
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				cursor: pointer;
+			}
+
+			.optionIcon {
+				margin-bottom: 40px;
+			}
+
+			.optionName {
+				font-family: UbuntuBold;
+				font-size: 1rem;
+				color: var(--blue-marine);
+				margin-bottom: 0.3em;
+			}
+
+			.optionPrice {
+				color: var(--gray-cool);
+				font-family: UbuntuMedium;
+
+				&::before {
+					font-family: UbuntuMedium;
+				}
+
+				/* &::before {
+					content: "$" attr(monthly) "/mo";
+				}
+				:root:has(.input-plan-pay-mode:checked) &::before {
+					content: "$" attr(yearly) "/yr";
+				} */
+
+				:root:has(.input-plan-pay-mode:checked) &::after {
+					content: "2 months free";
+					display: block;
+					color: var(--blue-marine);
+					margin-top: 0.2em;
+				}
+			}
+
+			&:has(input[type="radio"]:checked) {
+				border-color: var(--focus);
+				background-color: var(--focus-background);
+			}
+
+			:root:has(.input-plan-pay-mode:not(:checked)) & {
+				.input-plan[value="arcade"] ~ .optionPrice::before {
+					content: "$" counter(plan-arcade-mo) "/mo"
+				}
+				.input-plan[value="advanced"] ~ .optionPrice::before {
+					content: "$" counter(plan-advanced-mo) "/mo"
+				}
+				.input-plan[value="pro"] ~ .optionPrice::before {
+					content: "$" counter(plan-pro-mo) "/mo"
+				}
+			}
+			:root:has(.input-plan-pay-mode:checked) & {
+				.input-plan[value="arcade"] ~ .optionPrice::before {
+					content: "$" counter(plan-arcade-yr) "/yr"
+				}
+				.input-plan[value="advanced"] ~ .optionPrice::before {
+					content: "$" counter(plan-advanced-yr) "/yr"
+				}
+				.input-plan[value="pro"] ~ .optionPrice::before {
+					content: "$" counter(plan-pro-yr) "/yr"
+				}
+			}
+		}
+	}
+
+	.toggle {
+		width: 100%;
+		background-color: var(--focus-background);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 1em;
+		font-size: 0.9rem;
+		font-family: UbuntuBold;
+		padding: 1.2em;
+
+		input[type="checkbox"] {
+			--padding: 0.25em;
+			appearance: none;
+			width: 2.7em;
+			height: 1.3em;
+			background-color: var(--blue-marine);
+			border-radius: 200px;
+			position: relative;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+
+			&::before {
+				content: '';
+				position: absolute;
+				left: var(--padding);
+				width: 0.8em;
+				height: 0.8em;
+				background-color: white;
+				border-radius: 50%;
+				transition: 0.2s;
+			}
+
+			&:checked::before {
+				left: calc(100% - 0.8em - var(--padding));
+			}
+		}
+
+		&::before {
+			content: attr(value0);
+			font-family: UbuntuBold;
+		}
+
+		&::after {
+			content: attr(value1);
+			font-family: UbuntuBold;
+		}
+
+		&:has(input[type="checkbox"]:checked)::before {
+			color: var(--gray-cool);
+		}
+
+		&:has(input[type="checkbox"]:not(:checked))::after {
+			color: var(--gray-cool);
+		}
+	}
+
+	.checkboxOptions {
+		display: flex;
+		justify-content: stretch;
+		flex-direction: column;
+		gap: 1em;
+
+		.option {
+			border: 2px solid var(--gray-light);
+			border-radius: 8px;
+			padding: 1em;
+			display: grid;
+			align-items: center;
+			gap: 0.2em 1.2em;
+			grid-template: auto auto / auto 1fr auto;
+			position: relative;
+			user-select: none;
+
+			.optionCheckbox {
+				grid-area: 1 / 1 / -1 / 2;
+			}
+
+			input[type="checkbox"] {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				appearance: none;
+				cursor: pointer;
+				z-index: 1;
+			}
+
+			.optionCheckbox {
+				width: 1.5em;
+				height: 1.5em;
+				border: 2px solid var(--gray-light);
+				border-radius: 5px;
+				cursor: pointer;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				position: relative;
+			}
+
+			.optionTitle {
+				font-family: UbuntuBold;
+			}
+
+			.optionDescription {
+				color: var(--gray-cool);
+			}
+
+			.optionPrice {
+				grid-area: 1 / -2 / -1 / -1;
+				color: var(--blue-purplish);
+
+				/* &::before {
+					content: "+$" attr(monthly) "/mo";
+				}
+
+				:root:has(.input-plan-pay-mode:checked) &::before {
+					content: "+$" attr(yearly) "/yr";
+				} */
+			}
+
+			&:has(input[type="checkbox"]:checked) {
+				border-color: var(--focus);
+				background-color: var(--focus-background);
+
+				.optionCheckbox {
+					background-color: var(--blue-purplish);
+					border-color: var(--blue-purplish);
+		
+					&::before {
+						content: '';
+						position: absolute;
+						border: 2px solid white;
+						border-width: 0 0 3px 3px;
+						border-radius: 1px;
+						width: 60%;
+						height: 35%;
+						rotate: -45deg;
+						translate: 0 -10%;
+					}
+				}
+			}
+
+			:root:has(.input-plan-pay-mode:not(:checked)) & {
+				.input-addons[value="online-service"] ~ .optionPrice::before {
+					content: "$" counter(addon-service-mo) "/mo"
+				}
+				.input-addons[value="larger-storage"] ~ .optionPrice::before {
+					content: "$" counter(addon-storage-mo) "/mo"
+				}
+				.input-addons[value="customizable-profile"] ~ .optionPrice::before {
+					content: "$" counter(addon-profile-mo) "/mo"
+				}
+			}
+			:root:has(.input-plan-pay-mode:checked) & {
+				.input-addons[value="online-service"] ~ .optionPrice::before {
+					content: "$" counter(addon-service-yr) "/yr"
+				}
+				.input-addons[value="larger-storage"] ~ .optionPrice::before {
+					content: "$" counter(addon-storage-yr) "/yr"
+				}
+				.input-addons[value="customizable-profile"] ~ .optionPrice::before {
+					content: "$" counter(addon-profile-yr) "/yr"
+				}
+			}
+		}
+	}
+
+	
+	.summary {
+		display: grid;
+		grid-template-columns: 1fr auto;
+		align-items: center;
+		gap: 2em;
+
+		.subgrid {
+			display: grid;
+			align-items: center;
+			grid-template-columns: subgrid;
+			grid-column: 1 / -1;
+		}
+
+		.sub {
+			background: var(--focus-background);
+			border-radius: 10px;
+			padding: 1.5em;
+			gap: 1em;
+		}
+		.sum {
+			margin: 0 1.5em;
+		}
+
+		.planPrice {
+			grid-row: span 2;
+
+			&::before, &::after {
+				font-family: UbuntuBold !important;
+			}
+
+			&::before {
+				content: "$" counter(planPrice) "/";
+			}
+
+			&::after {
+				content: "mo";
+			}
+
+			:root:has(.input-plan-pay-mode:checked) &::after {
+				content: "yr";
+			}
+		}
+
+		.changePlan {
+			margin-top: -0.8em;
+			position: relative;
+
+			.stepRadio {
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				appearance: none;
+				cursor: pointer;
+			}
+		}
+
+		.planName, .planPrice {
+			font-family: UbuntuBold !important;
+			color: var(--blue-marine);
+			font-size: 1rem;
+		}
+
+		.planName {
+			&::before, &::after {
+				font-family: UbuntuBold !important;
+			}
+			&::before {
+				content: "Arcade";
+			}
+			:root:has(.input-plan[value="advanced"]:checked) &::before {
+				content: "Advanced";
+			}
+			:root:has(.input-plan[value="pro"]:checked) &::before {
+				content: "Pro";
+			}
+
+			&::after {
+				content: " (Monthly)";
+			}
+			:root:has(.input-plan-pay-mode:checked) &::after {
+				content: " (Yearly)";
+			}
+		}
+
+		hr {
+			grid-column: 1 / -1;
+			border: 1px solid #E7E8ED;
+			margin: 0.6em 0;
+		}
+
+		.itemName {
+			color: var(--gray-cool);
+		}
+
+		.itemPrice {
+			color: var(--blue-marine);
+			font-family: UbuntuMedium;
+
+			&::before, &::after {
+				font-family: UbuntuMedium;
+			}
+
+			:root:has(.input-plan-pay-mode:not(:checked)) & {
+				&[item="service"]::before {
+					content: "+$" counter(addon-service-mo) "/mo";
+				}
+				&[item="storage"]::before {
+					content: "+$" counter(addon-storage-mo) "/mo";
+				}
+				&[item="profile"]::before {
+					content: "+$" counter(addon-profile-mo) "/mo";
+				}
+			}
+			:root:has(.input-plan-pay-mode:checked) & {
+				&[item="service"]::before {
+					content: "+$" counter(addon-service-yr) "/yr";
+				}
+				&[item="storage"]::before {
+					content: "+$" counter(addon-storage-yr) "/yr";
+				}
+				&[item="profile"]::before {
+					content: "+$" counter(addon-profile-yr) "/yr";
+				}
+			}
+		}
+
+		:root:not(:has(.input-addons[value="online-service"]:checked)) & {
+			.itemName[item="service"], .itemPrice[item="service"] {
+				display: none;
+			}
+		}
+		:root:not(:has(.input-addons[value="larger-storage"]:checked)) & {
+			.itemName[item="storage"], .itemPrice[item="storage"] {
+				display: none;
+			}
+		}
+		:root:not(:has(.input-addons[value="customizable-profile"]:checked)) & {
+			.itemName[item="profile"], .itemPrice[item="profile"] {
+				display: none;
+			}
+		}
+
+		:root:has(.input-plan-pay-mode:not(:checked)) & .totalName::after {
+			content: " (per month)";
+		}
+		:root:has(.input-plan-pay-mode:checked) & .totalName::after {
+			content: " (per year)";
+		}
+
+		.totalPrice {
+			&::before, &::after {
+				font-family: UbuntuBold;
+				color: var(--blue-purplish);
+				font-size: 1.3rem;
+			}
+
+			&::before {
+				content: "$" counter(totalPrice) "/";
+			}
+
+			&::after {
+				content: "mo";
+			}
+
+			:root:has(.input-plan-pay-mode:checked) &::after {
+				content: "yr";
+			}
+		}
+
+		.itemPrice {
+			text-align: right;
+		}
+	}
+
+	/* .checkbox {
+		appearance: none;
+		position: relative;
+		width: 1.5em;
+		height: 1.5em;
+		border: 2px solid var(--gray-light);
+		border-radius: 5px;
+		cursor: pointer;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		&:checked {
+			background-color: var(--blue-purplish);
+			border-color: var(--blue-purplish);
+
+			&::before {
+				content: '';
+				position: absolute;
+				border: 2px solid white;
+				border-width: 0 0 3px 3px;
+				border-radius: 1px;
+				width: 60%;
+				height: 35%;
+				rotate: -45deg;
+				translate: 0 -10%;
+			}
+		}
+	} */
+
+	.stepButtons {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.submit {
+		position: relative;
+
+		&::before {
+			content: "Next Step";
+		}
+
+		:root:has(.stepRadio:checked[value="4"]) & {
+			background-color: var(--blue-purplish);
+
+			&::before {
+				content: "Confirm";
+			}
+		}
+
+		.stepRadio {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			appearance: none;
+			cursor: pointer;
+		}
+
+		/* .submitButton {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			pointer-events: none;
+		} */
+
+		.stepCheck {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			appearance: none;
+			cursor: pointer;
+			_background: orange;
+
+			&:checked {
+				display: none;
+			}
+
+			/* &::before { content: "Checkbox" }
+			&:nth-child(5) { background: red };
+			&:nth-child(6) { background: yellow };
+			&:nth-child(7) { background: green };
+			&:nth-child(8) { background: blue }; */
+		}
+	}
+
+	.back {
+		justify-self: start;
+		position: relative;
+
+		&::before {
+			content: "Go Back";
+		}
+
+		.stepRadio {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			appearance: none;
+			cursor: pointer;
+		}
+
+		:root:has(.stepRadio:checked[value="1"]) & {
+			visibility: hidden;
+		}
+	}
+
+
+	.formStep.thanks {
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		gap: 1rem;
+		padding: 2.3em 1em;
+
+		svg {
+			margin-bottom: 1rem;
+		}
+
+		h1 {
+			font-family: UbuntuMedium;
+		}
+
+		article {
+			color: var(--gray-cool);
+			line-height: 1.5em;
+			max-width: 60ch;
+		}
+	}
+}
+
+.button {
+	background-color: var(--blue-marine);
+	color: white;
+	padding: 0.8em 1.6em;
+	border-radius: 5px;
+	cursor: pointer;
+	font-family: UbuntuMedium;
+	transition: 0.2s opacity;
+
+	&:hover {
+		opacity: 0.8;
+	}
+
+	&::before {
+		font-family: UbuntuMedium;
+	}
+}
+
+.button.ghost {
+	background-color: transparent;
+	color: var(--gray-cool);
+	transition-property: color;
+
+	&:hover {
+		color: var(--blue-marine);
+	}
+}
+
+.button.link {
+	background-color: transparent;
+	color: var(--gray-cool);
+	padding: 0;
+	font-family: UbuntuRegular;
+	text-decoration: 1.5px underline;
+}
+
+
+
+body:has(.stepRadio:checked[value="1"]) .formStep:not(:nth-child(1)),
+body:has(.stepRadio:checked[value="2"]) .formStep:not(:nth-child(2)),
+body:has(.stepRadio:checked[value="3"]) .formStep:not(:nth-child(3)),
+body:has(.stepRadio:checked[value="4"]) .formStep:not(:nth-child(4)),
+body:has(.stepRadio:checked[value="submit"]) .formStep:not(:nth-child(5)) {
+	_display: none;
+	visibility: hidden;
+	position: absolute;
+	width: 0 !important;
+	height: 0 !important;
+	overflow: hidden;
+}
+
+body:has(.stepRadio:checked[value="submit"]) .stepButtons {
+	display: none;
+}
+
+body:has(.stepRadio:checked[value="1"]) .stepCheck:not(:nth-child(5)),
+body:has(.stepRadio:checked[value="2"]) .stepCheck:not(:nth-child(6)),
+body:has(.stepRadio:checked[value="3"]) .stepCheck:not(:nth-child(7)),
+body:has(.stepRadio:checked[value="4"]) .stepCheck:not(:nth-child(8)) {
+	display: none;
+}
+
+
+/*
+body:has(.submit input[type="checkbox"]:nth-child(1):checked):not(:has(.formStep:nth-child(1) input:invalid)) .step:nth-child(2) .stepRadio,
+body:has(.submit input[type="checkbox"]:nth-child(2):checked):not(:has(.formStep:nth-child(2) input:invalid)) .step:nth-child(3) .stepRadio,
+body:has(.submit input[type="checkbox"]:nth-child(3):checked):not(:has(.formStep:nth-child(3) input:invalid)) .step:nth-child(4) .stepRadio
+*/
+
+/* body:has(.submit input[type="checkbox"]:nth-child(1):checked):not(:has(.formStep:nth-child(1) input:invalid)) .step:nth-child(2) .stepRadio,
+body:has(.submit input[type="checkbox"]:nth-child(2):checked):not(:has(.formStep:nth-child(1) input:invalid)):not(:has(.formStep:nth-child(2) input:invalid)) .step:nth-child(3) .stepRadio,
+body:has(.submit input[type="checkbox"]:nth-child(3):checked):not(:has(.formStep:nth-child(1) input:invalid)):not(:has(.formStep:nth-child(2) input:invalid)):not(:has(.formStep:nth-child(3) input:invalid)) .step:nth-child(4) .stepRadio {
+	background-color: green !important;
+} */
+
+body:has(.formStep:nth-child(1) input:invalid) .submit .stepRadio:nth-child(1) {
+	display: none;
+}
+
+body:has(.stepRadio[value="1"]:checked) .step:nth-child(1) .stepNumber,
+body:has(.stepRadio[value="2"]:checked) .step:nth-child(2) .stepNumber,
+body:has(.stepRadio[value="3"]:checked) .step:nth-child(3) .stepNumber,
+body:has(.stepRadio[value="4"]:checked) .step:nth-child(4) .stepNumber,
+body:has(.stepRadio[value="submit"]:checked) .step:nth-child(4) .stepNumber {
+	background-color: var(--blue-light);
+	color: var(--blue-marine);
+}
+
+body:has(.stepRadio[value="1"]:checked) .submit .stepRadio:not(:nth-child(1)),
+body:has(.stepRadio[value="2"]:checked) .submit .stepRadio:not(:nth-child(2)),
+body:has(.stepRadio[value="3"]:checked) .submit .stepRadio:not(:nth-child(3)),
+body:has(.stepRadio[value="4"]:checked) .submit .stepRadio:not(:nth-child(4)) {
+	display: none;
+}
+
+body:has(.stepRadio[value="2"]:checked) .back .stepRadio:not(:nth-child(1)),
+body:has(.stepRadio[value="3"]:checked) .back .stepRadio:not(:nth-child(2)),
+body:has(.stepRadio[value="4"]:checked) .back .stepRadio:not(:nth-child(3)) {
+	display: none;
+}
+
+.formStep:nth-child(1):not(:has(input:invalid)) ~ .stepButtons .stepCheck:nth-child(5),
+.formStep:nth-child(2):not(:has(input:invalid)) ~ .stepButtons .stepCheck:nth-child(6),
+.formStep:nth-child(3):not(:has(input:invalid)) ~ .stepButtons .stepCheck:nth-child(7),
+.formStep:nth-child(4):not(:has(input:invalid)) ~ .stepButtons .stepCheck:nth-child(8) {
+	display: none;
+}
+
+/* body:has(.stepRadio:nth-child(1):checked):not(:has(.formStep:nth-child(1) input:invalid)) .submitButton,
+body:has(.stepRadio:nth-child(2):checked):not(:has(.formStep:nth-child(2) input:invalid)) .submitButton,
+body:has(.stepRadio:nth-child(3):checked):not(:has(.formStep:nth-child(3) input:invalid)) .submitButton,
+body:has(.stepRadio:nth-child(4):checked):not(:has(.formStep:nth-child(4) input:invalid)) .submitButton {
+	pointer-events: all;
+} */
+
+
+@media only screen and (max-width: 600px) {
+	main {
+		min-height: 100vh;
+		min-height: 100dvh;
+		width: 100%;
+		margin: 0;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.sidebar {
+		position: fixed;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 30%;
+		min-height: 9rem;
+		background-image: url("assets/images/bg-sidebar-mobile.svg");
+		border-radius: 0;
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
+		padding: 2rem;
+
+		.stepCaption, .stepName {
+			display: none;
+		}
+	}
+
+	.form {
+		position: fixed;
+		top: 6.5rem;
+		background: white;
+		border-radius: 10px;
+		box-shadow: var(--shadow);
+		width: 95%;
+		min-width: min(100%, 50ch);
+	}
+
+	.stepButtons {
+		position: fixed;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		padding: 0.7rem;
+		background-color: white;
+		box-shadow: 0 -10px 10px #00000011;
+	}
+
+	.radioOptions {
+		grid-template-columns: 1fr !important;
+		grid-template-rows: repeat(3, 1fr);
+
+		.option {
+			grid-template-columns: auto 1fr !important;
+			column-gap: 1em;
+
+			.optionIcon {
+				grid-row: 1 / 3;
+				margin: 0 !important;
+			}
+		}
+	}
+}
+
+
+
+
+
+
+body:has(.input-plan-pay-mode:not(:checked)) {
+	.input-plan:checked {
+		&[value="arcade"] {
+			counter-set: planPrice 9;
+			counter-increment: totalPrice 9;
+		}
+		&[value="advanced"] {
+			counter-set: planPrice 12;
+			counter-increment: totalPrice 12;
+		}
+		&[value="pro"] {
+			counter-set: planPrice 15;
+			counter-increment: totalPrice 15;
+		}
+	}
+}
+
+body:has(.input-plan-pay-mode:checked) {
+	.input-plan:checked {
+		&[value="arcade"] {
+			counter-set: planPrice 90;
+			counter-increment: totalPrice 90;
+		}
+		&[value="advanced"] {
+			counter-set: planPrice 120;
+			counter-increment: totalPrice 120;
+		}
+		&[value="pro"] {
+			counter-set: planPrice 150;
+			counter-increment: totalPrice 150;
+		}
+	}
+}
+
+body:has(.input-plan-pay-mode:not(:checked)) {
+	.input-addons:checked {
+		&[value="online-service"] {
+			counter-increment: totalPrice 1;
+		}
+		&[value="larger-storage"] {
+			counter-increment: totalPrice 2;
+		}
+		&[value="customizable-profile"] {
+			counter-increment: totalPrice 2;
+		}
+	}
+}
+
+body:has(.input-plan-pay-mode:checked) {
+	.input-addons:checked {
+		&[value="online-service"] {
+			counter-increment: totalPrice 10;
+		}
+		&[value="larger-storage"] {
+			counter-increment: totalPrice 20;
+		}
+		&[value="customizable-profile"] {
+			counter-increment: totalPrice 20;
+		}
+	}
+}
+
+
+
+
+body { /* Set prices here */
+	counter-reset: 
+		plan-arcade-mo 9
+		plan-arcade-yr 90
+		
+		plan-advanced-mo 12
+		plan-advanced-yr 120
+		
+		plan-pro-mo 15
+		plan-pro-yr 150
+
+
+		addon-service-mo 1
+		addon-service-yr 10
+
+		addon-storage-mo 2
+		addon-storage-yr 20
+
+		addon-profile-mo 2
+		addon-profile-yr 20
+
+
+
+		planPrice totalPrice
+	;
+}
