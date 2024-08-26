@@ -4,7 +4,8 @@
 }
 
 body {
-	height: 100vh;
+	min-height: 100vh;
+	min-height: 100dvh;
 	font-size: min(3rem, 8vw);
 	text-align: center;
 	_text-shadow: 0 0 50px #ffffff44, 0 0 200px white;
