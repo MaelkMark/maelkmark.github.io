@@ -1,3 +1,29 @@
+/* Set prices here */
+:root {
+	--plan-arcade-mo: 9;
+	--plan-arcade-yr: 90;
+	
+	--plan-advanced-mo: 12;
+	--plan-advanced-yr: 120;
+	
+	--plan-pro-mo: 15;
+	--plan-pro-yr: 150;
+
+
+	--addon-service-mo: 1;
+	--addon-service-yr: 10;
+
+	--addon-storage-mo: 2;
+	--addon-storage-yr: 20;
+
+	--addon-profile-mo: 2;
+	--addon-profile-yr: 20;
+}
+
+
+
+
+
 @font-face {
 	font-family: UbuntuRegular;
 	src: url(assets/fonts/Ubuntu-Regular.ttf);
@@ -44,6 +70,20 @@ body {
 	align-items: center;
 	flex-direction: column;
 	background-color: #EEF5FF;
+	counter-reset: 
+		plan-arcade-mo var(--plan-arcade-mo)
+		plan-arcade-yr var(--plan-arcade-yr)
+		plan-advanced-mo var(--plan-advanced-mo)
+		plan-advanced-yr var(--plan-advanced-yr)
+		plan-pro-mo var(--plan-pro-mo)
+		plan-pro-yr var(--plan-pro-yr)
+		addon-service-mo var(--addon-service-mo)
+		addon-service-yr var(--addon-service-yr)
+		addon-storage-mo var(--addon-storage-mo)
+		addon-storage-yr var(--addon-storage-yr)
+		addon-profile-mo var(--addon-profile-mo)
+		addon-profile-yr var(--addon-profile-yr)
+		planPrice totalPrice;
 }
 
 main {
@@ -747,12 +787,6 @@ main {
 			&:checked {
 				display: none;
 			}
-
-			/* &::before { content: "Checkbox" }
-			&:nth-child(5) { background: red };
-			&:nth-child(6) { background: yellow };
-			&:nth-child(7) { background: green };
-			&:nth-child(8) { background: blue }; */
 		}
 	}
 
@@ -840,85 +874,6 @@ main {
 }
 
 
-
-body:has(.stepRadio:checked[value="1"]) .formStep:not(:nth-child(1)),
-body:has(.stepRadio:checked[value="2"]) .formStep:not(:nth-child(2)),
-body:has(.stepRadio:checked[value="3"]) .formStep:not(:nth-child(3)),
-body:has(.stepRadio:checked[value="4"]) .formStep:not(:nth-child(4)),
-body:has(.stepRadio:checked[value="submit"]) .formStep:not(:nth-child(5)) {
-	_display: none;
-	visibility: hidden;
-	position: absolute;
-	width: 0 !important;
-	height: 0 !important;
-	overflow: hidden;
-}
-
-body:has(.stepRadio:checked[value="submit"]) .stepButtons {
-	display: none;
-}
-
-body:has(.stepRadio:checked[value="1"]) .stepCheck:not(:nth-child(5)),
-body:has(.stepRadio:checked[value="2"]) .stepCheck:not(:nth-child(6)),
-body:has(.stepRadio:checked[value="3"]) .stepCheck:not(:nth-child(7)),
-body:has(.stepRadio:checked[value="4"]) .stepCheck:not(:nth-child(8)) {
-	display: none;
-}
-
-
-/*
-body:has(.submit input[type="checkbox"]:nth-child(1):checked):not(:has(.formStep:nth-child(1) input:invalid)) .step:nth-child(2) .stepRadio,
-body:has(.submit input[type="checkbox"]:nth-child(2):checked):not(:has(.formStep:nth-child(2) input:invalid)) .step:nth-child(3) .stepRadio,
-body:has(.submit input[type="checkbox"]:nth-child(3):checked):not(:has(.formStep:nth-child(3) input:invalid)) .step:nth-child(4) .stepRadio
-*/
-
-/* body:has(.submit input[type="checkbox"]:nth-child(1):checked):not(:has(.formStep:nth-child(1) input:invalid)) .step:nth-child(2) .stepRadio,
-body:has(.submit input[type="checkbox"]:nth-child(2):checked):not(:has(.formStep:nth-child(1) input:invalid)):not(:has(.formStep:nth-child(2) input:invalid)) .step:nth-child(3) .stepRadio,
-body:has(.submit input[type="checkbox"]:nth-child(3):checked):not(:has(.formStep:nth-child(1) input:invalid)):not(:has(.formStep:nth-child(2) input:invalid)):not(:has(.formStep:nth-child(3) input:invalid)) .step:nth-child(4) .stepRadio {
-	background-color: green !important;
-} */
-
-body:has(.formStep:nth-child(1) input:invalid) .submit .stepRadio:nth-child(1) {
-	display: none;
-}
-
-body:has(.stepRadio[value="1"]:checked) .step:nth-child(1) .stepNumber,
-body:has(.stepRadio[value="2"]:checked) .step:nth-child(2) .stepNumber,
-body:has(.stepRadio[value="3"]:checked) .step:nth-child(3) .stepNumber,
-body:has(.stepRadio[value="4"]:checked) .step:nth-child(4) .stepNumber,
-body:has(.stepRadio[value="submit"]:checked) .step:nth-child(4) .stepNumber {
-	background-color: var(--blue-light);
-	color: var(--blue-marine);
-}
-
-body:has(.stepRadio[value="1"]:checked) .submit .stepRadio:not(:nth-child(1)),
-body:has(.stepRadio[value="2"]:checked) .submit .stepRadio:not(:nth-child(2)),
-body:has(.stepRadio[value="3"]:checked) .submit .stepRadio:not(:nth-child(3)),
-body:has(.stepRadio[value="4"]:checked) .submit .stepRadio:not(:nth-child(4)) {
-	display: none;
-}
-
-body:has(.stepRadio[value="2"]:checked) .back .stepRadio:not(:nth-child(1)),
-body:has(.stepRadio[value="3"]:checked) .back .stepRadio:not(:nth-child(2)),
-body:has(.stepRadio[value="4"]:checked) .back .stepRadio:not(:nth-child(3)) {
-	display: none;
-}
-
-.formStep:nth-child(1):not(:has(input:invalid)) ~ .stepButtons .stepCheck:nth-child(5),
-.formStep:nth-child(2):not(:has(input:invalid)) ~ .stepButtons .stepCheck:nth-child(6),
-.formStep:nth-child(3):not(:has(input:invalid)) ~ .stepButtons .stepCheck:nth-child(7),
-.formStep:nth-child(4):not(:has(input:invalid)) ~ .stepButtons .stepCheck:nth-child(8) {
-	display: none;
-}
-
-/* body:has(.stepRadio:nth-child(1):checked):not(:has(.formStep:nth-child(1) input:invalid)) .submitButton,
-body:has(.stepRadio:nth-child(2):checked):not(:has(.formStep:nth-child(2) input:invalid)) .submitButton,
-body:has(.stepRadio:nth-child(3):checked):not(:has(.formStep:nth-child(3) input:invalid)) .submitButton,
-body:has(.stepRadio:nth-child(4):checked):not(:has(.formStep:nth-child(4) input:invalid)) .submitButton {
-	pointer-events: all;
-} */
-
-
 @media only screen and (max-width: 600px) {
 	main {
 		min-height: 100vh;
@@ -985,23 +940,91 @@ body:has(.stepRadio:nth-child(4):checked):not(:has(.formStep:nth-child(4) input:
 }
 
 
+/* For hiding the not actual steps */
+body:has(.stepRadio:checked[value="1"]) .formStep:not(:nth-child(1)),
+body:has(.stepRadio:checked[value="2"]) .formStep:not(:nth-child(2)),
+body:has(.stepRadio:checked[value="3"]) .formStep:not(:nth-child(3)),
+body:has(.stepRadio:checked[value="4"]) .formStep:not(:nth-child(4)),
+body:has(.stepRadio:checked[value="submit"]) .formStep:not(:nth-child(5)) {
+	_display: none;
+	visibility: hidden;
+	position: absolute;
+	width: 0 !important;
+	height: 0 !important;
+	overflow: hidden;
+}
+
+/* For showing only the next checkbox (to show error messages) for the current step */
+body:has(.stepRadio:checked[value="1"]) .stepCheck:not([step="1"]),
+body:has(.stepRadio:checked[value="2"]) .stepCheck:not([step="2"]),
+body:has(.stepRadio:checked[value="3"]) .stepCheck:not([step="3"]),
+body:has(.stepRadio:checked[value="4"]) .stepCheck:not([step="4"]) {
+	display: none;
+}
+
+/* For only showing the next radio (to go to the next step) for the current step */
+body:has(.stepRadio[value="1"]:checked) .submit .stepRadio:not([step="1"]),
+body:has(.stepRadio[value="2"]:checked) .submit .stepRadio:not([step="2"]),
+body:has(.stepRadio[value="3"]:checked) .submit .stepRadio:not([step="3"]),
+body:has(.stepRadio[value="4"]:checked) .submit .stepRadio:not([step="4"]) {
+	display: none;
+}
+
+/* Hide the next button radio when there's an invalid input in the step */
+body:has(.formStep:nth-child(1) input:invalid) .submit .stepRadio[step="1"],
+body:has(.formStep:nth-child(2) input:invalid) .submit .stepRadio[step="2"],
+body:has(.formStep:nth-child(3) input:invalid) .submit .stepRadio[step="3"],
+body:has(.formStep:nth-child(4) input:invalid) .submit .stepRadio[step="4"] {
+	display: none;
+}
+
+/* For only showing the back radio (for going back) for the current step */
+body:has(.stepRadio[value="2"]:checked) .back .stepRadio:not([step="2"]),
+body:has(.stepRadio[value="3"]:checked) .back .stepRadio:not([step="3"]),
+body:has(.stepRadio[value="4"]:checked) .back .stepRadio:not([step="4"]) {
+	display: none;
+}
+
+
+/* Hide the next checkbox when there's no invalid input */
+.formStep:nth-child(1):not(:has(input:invalid)) ~ .stepButtons .stepCheck[step="1"],
+.formStep:nth-child(2):not(:has(input:invalid)) ~ .stepButtons .stepCheck[step="2"],
+.formStep:nth-child(3):not(:has(input:invalid)) ~ .stepButtons .stepCheck[step="3"],
+.formStep:nth-child(4):not(:has(input:invalid)) ~ .stepButtons .stepCheck[step="4"] {
+	display: none;
+}
+
+/* Set the style of the active step in the sidebar */
+body:has(.stepRadio[value="1"]:checked) .step:nth-child(1) .stepNumber,
+body:has(.stepRadio[value="2"]:checked) .step:nth-child(2) .stepNumber,
+body:has(.stepRadio[value="3"]:checked) .step:nth-child(3) .stepNumber,
+body:has(.stepRadio[value="4"]:checked) .step:nth-child(4) .stepNumber,
+body:has(.stepRadio[value="submit"]:checked) .step:nth-child(4) .stepNumber {
+	background-color: var(--blue-light);
+	color: var(--blue-marine);
+}
+
+/* Hide the step buttons (back, next) when the form is confirmed */
+body:has(.stepRadio:checked[value="submit"]) .stepButtons {
+	display: none;
+}
 
 
 
-
+/* Setting/incrementing the counters */
 body:has(.input-plan-pay-mode:not(:checked)) {
 	.input-plan:checked {
 		&[value="arcade"] {
-			counter-set: planPrice 9;
-			counter-increment: totalPrice 9;
+			counter-set: planPrice var(--plan-arcade-mo);
+			counter-increment: totalPrice var(--plan-arcade-mo);
 		}
 		&[value="advanced"] {
-			counter-set: planPrice 12;
-			counter-increment: totalPrice 12;
+			counter-set: planPrice var(--plan-advanced-mo);
+			counter-increment: totalPrice var(--plan-advanced-mo);
 		}
 		&[value="pro"] {
-			counter-set: planPrice 15;
-			counter-increment: totalPrice 15;
+			counter-set: planPrice var(--plan-pro-mo);
+			counter-increment: totalPrice var(--plan-pro-mo);
 		}
 	}
 }
@@ -1009,16 +1032,16 @@ body:has(.input-plan-pay-mode:not(:checked)) {
 body:has(.input-plan-pay-mode:checked) {
 	.input-plan:checked {
 		&[value="arcade"] {
-			counter-set: planPrice 90;
-			counter-increment: totalPrice 90;
+			counter-set: planPrice var(--plan-arcade-yr);
+			counter-increment: totalPrice var(--plan-arcade-yr);
 		}
 		&[value="advanced"] {
-			counter-set: planPrice 120;
-			counter-increment: totalPrice 120;
+			counter-set: planPrice var(--plan-advanced-yr);
+			counter-increment: totalPrice var(--plan-advanced-yr);
 		}
 		&[value="pro"] {
-			counter-set: planPrice 150;
-			counter-increment: totalPrice 150;
+			counter-set: planPrice var(--plan-pro-yr);
+			counter-increment: totalPrice var(--plan-pro-yr);
 		}
 	}
 }
@@ -1026,13 +1049,13 @@ body:has(.input-plan-pay-mode:checked) {
 body:has(.input-plan-pay-mode:not(:checked)) {
 	.input-addons:checked {
 		&[value="online-service"] {
-			counter-increment: totalPrice 1;
+			counter-increment: totalPrice var(--addon-service-mo);
 		}
 		&[value="larger-storage"] {
-			counter-increment: totalPrice 2;
+			counter-increment: totalPrice var(--addon-storage-mo);
 		}
 		&[value="customizable-profile"] {
-			counter-increment: totalPrice 2;
+			counter-increment: totalPrice var(--addon-profile-mo);
 		}
 	}
 }
@@ -1040,43 +1063,13 @@ body:has(.input-plan-pay-mode:not(:checked)) {
 body:has(.input-plan-pay-mode:checked) {
 	.input-addons:checked {
 		&[value="online-service"] {
-			counter-increment: totalPrice 10;
+			counter-increment: totalPrice var(--addon-service-yr);
 		}
 		&[value="larger-storage"] {
-			counter-increment: totalPrice 20;
+			counter-increment: totalPrice var(--addon-storage-yr);
 		}
 		&[value="customizable-profile"] {
-			counter-increment: totalPrice 20;
+			counter-increment: totalPrice var(--addon-profile-yr);
 		}
 	}
-}
-
-
-
-
-body { /* Set prices here */
-	counter-reset: 
-		plan-arcade-mo 9
-		plan-arcade-yr 90
-		
-		plan-advanced-mo 12
-		plan-advanced-yr 120
-		
-		plan-pro-mo 15
-		plan-pro-yr 150
-
-
-		addon-service-mo 1
-		addon-service-yr 10
-
-		addon-storage-mo 2
-		addon-storage-yr 20
-
-		addon-profile-mo 2
-		addon-profile-yr 20
-
-
-
-		planPrice totalPrice
-	;
 }
