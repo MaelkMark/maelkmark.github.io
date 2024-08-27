@@ -94,7 +94,7 @@ main {
 	min-height: 80vh;
 	width: 80%;
 	min-width: min(100%, 80ch);
-	max-width: 110ch;
+	max-width: 100ch;
 	box-shadow: var(--shadow);
 }
 
@@ -874,6 +874,35 @@ main {
 }
 
 
+.attribution {
+	position: fixed;
+	writing-mode: vertical-rl;
+	right: 0;
+	font-size: 0.8rem;
+	background-color: var(--blue-light);
+	color: var(--blue-marine);
+	padding: 0.5em;
+	border-radius: 5px 0 0 5px;
+	transition: 0.2s;
+	cursor: default;
+	text-align: center;
+
+	&:hover {
+		padding: 0.7em 1em 0.7em 0.7em;
+	}
+
+	a {
+		color: var(--blue-purplish);
+		font-family: UbuntuBold;
+		transition: 0.2s;
+
+		&:hover {
+			filter: brightness(0.7) saturate(0.7);
+		}
+	}
+}
+
+
 @media only screen and (max-width: 600px) {
 	main {
 		min-height: 100vh;
@@ -936,6 +965,11 @@ main {
 				margin: 0 !important;
 			}
 		}
+	}
+
+	.attribution {
+		padding: 0.2em;
+		font-size: 0.6rem;
 	}
 }
 
