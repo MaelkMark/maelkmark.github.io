@@ -50,7 +50,8 @@ main {
 	gap: 6em;
 	_position: fixed;
 	width: 100%;
-	height: calc(100% - 197px);
+	height: calc(100vh - 197px);
+	height: calc(100dvh - 197px);
 }
 
 @keyframes scrollBackground {
