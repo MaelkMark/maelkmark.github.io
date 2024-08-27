@@ -26,14 +26,15 @@ html {
 		background: var(--gradient);
 		background-clip: text;
 		-webkit-text-fill-color: transparent;
+		font-size: min(2rem, 4vw);
 	}
 }
 
 
 #cards {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(35ch, 1fr));
-	gap: 5em 1.5em;
+	grid-template-columns: repeat(auto-fit, minmax(40ch, 1fr));
+	gap: min(5em, 5vw) 1.5em;
 	justify-content: center;
 }
 
@@ -59,6 +60,8 @@ html {
 
 	.description {
 		font-size: 1.2rem;
+		max-width: 55ch;
+		text-align: justify;
 	}
 
 	.tags {
@@ -75,7 +78,12 @@ html {
 			cursor: default;
 		}
 
-		.difficulty {
+		.tag.without {
+			text-decoration: line-through;
+			opacity: 0.5;
+		}
+
+		.tag.difficulty {
 			color: black;
 			&.newbie {
 				background: #6abecd;
