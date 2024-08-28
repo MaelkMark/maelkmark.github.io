@@ -94,7 +94,7 @@ main {
 	min-height: 80vh;
 	width: 80%;
 	min-width: min(100%, 80ch);
-	max-width: 100ch;
+	max-width: 110ch;
 	box-shadow: var(--shadow);
 }
 
